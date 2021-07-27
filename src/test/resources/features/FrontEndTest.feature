@@ -1,17 +1,18 @@
 Feature: FrontEnd Test
 
-  Scenario: Open and run app
+  Scenario Outline: Open and run app
 
-    Given Login app
+    Given User is logged in
 
-    And Add new user
+    Then Add new user with Username as "<username>"
 
-    And Delete the user
+    And Edit user
 
-    And Details user
+    Then Delete user
 
-    Given Edit user with cancel
+    Then User is logged out
 
-    And Edit user and modify
+    Examples:
+      | username|
+      | Calin12 |
 
-    And Go back to login

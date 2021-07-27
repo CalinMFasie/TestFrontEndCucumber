@@ -5,7 +5,6 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -17,14 +16,15 @@ public class FrontEndStepDefs {
     WebDriver driver = new ChromeDriver();
     private LoginPage loginPage;
 
-    @Given("^Login app$")
-    public void LoginApp() {
-
+    @Given("User is logged in")
+    public void userIsLoggedIn() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
         driver.get("http://localhost:4200/");
         Assert.assertTrue(driver.getTitle().equals("Frontend"));
 
         loginPage = new LoginPage(driver);
+        loginPage.getUsername().sendKeys("User1");
+        loginPage.getPassword().sendKeys("Pass1");
         loginPage.getLoginButton().click();
 
         driver.navigate().refresh();
@@ -32,80 +32,22 @@ public class FrontEndStepDefs {
         Assert.assertTrue(driver.getCurrentUrl().equals(BASE_URL));
     }
 
-    @Given("Add new user")
-    public void addNewUser() {
+    @Then("Add new user with Username as {string}")
+    public void addNewUserWithUsernameAs(String username) {
         addUser();
         AddUser addUser = new AddUser(driver);
-//        driver.get(BASE_URL+"/");
-//        addUser = new AddUser(driver);
-//        addUser.getAddUserButton().click();
-//
-//        addUser.getUsername().sendKeys("Calin12");
-//        addUser.getEmail().sendKeys("calin@calin.ro12");
-//        addUser.getFullName().sendKeys("Calin User12");
-//        addUser.getPassword().sendKeys("Calin12");
-//        addUser.getGenderMale().sendKeys(Keys.SPACE);
-//        addUser.getSubmitButton().sendKeys(Keys.ENTER);
-
         driver.get(BASE_URL + "/");
         driver.navigate().refresh();
         boolean isNecessaryUserNameInserted = addUser.getInsertedNecessaryUsername().isDisplayed();
         Assert.assertTrue(isNecessaryUserNameInserted);
-        deleteAllUsers();
     }
 
-    @Then("Delete the user")
-    public void deleteUser() {
-
-//        addUser();
-        deleteAllUsers();
-
-        driver.navigate().refresh();
-        deleteAllUsers();
-
-
-    }
-
-    @And("Details user")
-    public void showDetails() {
-        addUser();
-        driver.get(BASE_URL + "/");
-        driver.navigate().refresh();
-        DetailsPage detailsPage = new DetailsPage(driver);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ie) {
-        }
-        detailsPage.getDetailsButton().click();
-        driver.get(BASE_URL + "/");
-        driver.navigate().refresh();
-
-        Assert.assertEquals("Calin12", detailsPage.getInsertedUsername().getText());
-        deleteAllUsers();
-    }
-
-    @Given("Edit user with cancel")
-    public void editUser() {
-        EditUser editUser;
-        editUser = new EditUser(driver);
-        addUser();
-        driver.get(BASE_URL + "/");
-        driver.navigate().refresh();
-
-        editUser.getEditUserButton().click();
-        editUser.getxButton().click();
-
-        deleteAllUsers();
-    }
-
-    @And("Edit user and modify")
+    @And("Edit user")
     public void editUserAndModify() {
         EditUser editUser;
         editUser = new EditUser(driver);
-        addUser();
         driver.get(BASE_URL + "/");
         driver.navigate().refresh();
-
         editUser.getEditUserButton().click();
         editUser.getUsername().clear();
         editUser.getUsername().sendKeys("Marcel1");
@@ -119,21 +61,48 @@ public class FrontEndStepDefs {
         driver.get(BASE_URL + "/");
         driver.navigate().refresh();
         Assert.assertEquals("Marcel1", editUser.getInsertedUsername().getText());
+    }
 
+    @Then("Delete user")
+    public void deleteUser() {
         deleteAllUsers();
     }
 
-    @And("Go back to login")
+    @Then("User is logged out")
     public void goBackToLogin() {
-        GoBack goBack;
+        GoBack goBack = new GoBack(driver);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ie) {
+        }
+        goBack.getGoBackButton().click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ie) {
+        }
         String actualUrl = "";
         driver.get(BASE_URL);
-        goBack = new GoBack(driver);
+    }
+
+    @And("Details user")
+    public void showDetails() {
+        addUser();
+        driver.get(BASE_URL + "/");
+        driver.navigate().refresh();
+        DetailsPage detailsPage = new DetailsPage(driver);
+
+        detailsPage.getDetailsButton().click();
+
+        driver.get(BASE_URL + "/");
+        driver.navigate().refresh();
+
+        Assert.assertEquals("Calin12", detailsPage.getInsertedUsername().getText());
+        deleteAllUsers();
     }
 
     @After()
     public void closeBrowser() {
-//        driver.quit();
+        driver.quit();
     }
 
     private void addUser() {

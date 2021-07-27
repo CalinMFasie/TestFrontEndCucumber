@@ -8,10 +8,15 @@ import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public class LoginPage {
+    private WebDriver driver;
+    @FindBy(xpath = "(//input[@class='form-control'])[1]")
+    private WebElement username;
+
+    @FindBy(xpath = "(//input[@class='form-control'])[2]")
+    private WebElement password;
 
     @FindBy(xpath = "//button[@class='btn btn-outline-primary']")
     private WebElement loginButton;
-    private WebDriver driver;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
