@@ -3,15 +3,15 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2021-07-27T14:14:31.861Z",
-        "line": 17,
+        "start_timestamp": "2021-07-27T14:51:13.838Z",
+        "line": 19,
         "name": "Open and run app",
         "description": "",
         "id": "frontend-test;open-and-run-app;;2",
         "after": [
           {
             "result": {
-              "duration": 68000000,
+              "duration": 71000000,
               "status": "passed"
             },
             "match": {
@@ -24,7 +24,7 @@
         "steps": [
           {
             "result": {
-              "duration": 3183000000,
+              "duration": 3098000000,
               "status": "passed"
             },
             "line": 5,
@@ -36,7 +36,7 @@
           },
           {
             "result": {
-              "duration": 1098000000,
+              "duration": 1086000000,
               "status": "passed"
             },
             "line": 7,
@@ -54,7 +54,7 @@
           },
           {
             "result": {
-              "duration": 1134000000,
+              "duration": 1079000000,
               "status": "passed"
             },
             "line": 9,
@@ -66,10 +66,22 @@
           },
           {
             "result": {
-              "duration": 325000000,
+              "duration": 1563000000,
               "status": "passed"
             },
             "line": 11,
+            "name": "Details user",
+            "match": {
+              "location": "StepDefinitions.FrontEndStepDefs.showDetails()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 323000000,
+              "status": "passed"
+            },
+            "line": 13,
             "name": "Delete user",
             "match": {
               "location": "StepDefinitions.FrontEndStepDefs.deleteUser()"
@@ -78,10 +90,10 @@
           },
           {
             "result": {
-              "duration": 2217000000,
+              "duration": 150000000,
               "status": "passed"
             },
-            "line": 13,
+            "line": 15,
             "name": "User is logged out",
             "match": {
               "location": "StepDefinitions.FrontEndStepDefs.goBackToLogin()"

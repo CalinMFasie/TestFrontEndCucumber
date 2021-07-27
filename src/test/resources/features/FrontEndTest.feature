@@ -8,6 +8,8 @@ Feature: FrontEnd Test
 
     And Edit user
 
+    And Details user
+
     Then Delete user
 
     Then User is logged out

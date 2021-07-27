@@ -8,10 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 public class DetailsPage {
     private WebDriver driver;
 
-    @FindBy(xpath = "//h1[contains(.,'Calin User1')]")
+    @FindBy(xpath = "//h1[contains(.,'Marcel User1')]")
     private WebElement detailsButton;
 
-    @FindBy(xpath = "(//span[contains(.,'Calin12')])[1]")
+    @FindBy(xpath = "(//span[contains(.,'Marcel1')])[1]")
     private WebElement insertedUsername;
 
     public DetailsPage(WebDriver driver) {

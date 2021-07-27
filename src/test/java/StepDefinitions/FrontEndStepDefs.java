@@ -63,6 +63,23 @@ public class FrontEndStepDefs {
         Assert.assertEquals("Marcel1", editUser.getInsertedUsername().getText());
     }
 
+    @And("Details user")
+    public void showDetails() {
+        driver.get(BASE_URL + "/");
+        driver.navigate().refresh();
+        DetailsPage detailsPage = new DetailsPage(driver);
+
+        detailsPage.getDetailsButton().click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ie) {
+        }
+        driver.get(BASE_URL + "/");
+        driver.navigate().refresh();
+
+        Assert.assertEquals("Marcel1", detailsPage.getInsertedUsername().getText());
+    }
+
     @Then("Delete user")
     public void deleteUser() {
         deleteAllUsers();
@@ -71,33 +88,9 @@ public class FrontEndStepDefs {
     @Then("User is logged out")
     public void goBackToLogin() {
         GoBack goBack = new GoBack(driver);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ie) {
-        }
         goBack.getGoBackButton().click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ie) {
-        }
         String actualUrl = "";
         driver.get(BASE_URL);
-    }
-
-    @And("Details user")
-    public void showDetails() {
-        addUser();
-        driver.get(BASE_URL + "/");
-        driver.navigate().refresh();
-        DetailsPage detailsPage = new DetailsPage(driver);
-
-        detailsPage.getDetailsButton().click();
-
-        driver.get(BASE_URL + "/");
-        driver.navigate().refresh();
-
-        Assert.assertEquals("Calin12", detailsPage.getInsertedUsername().getText());
-        deleteAllUsers();
     }
 
     @After()
