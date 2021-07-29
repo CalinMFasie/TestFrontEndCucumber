@@ -9,10 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class LoginPage {
     private WebDriver driver;
-    @FindBy(xpath = "(//input[@class='form-control'])[1]")
+    //    @FindBy(xpath = "(//input[@class='form-control'])[1]")
+    @FindBy(xpath = "//input[contains(@type,'text')]")
     private WebElement username;
 
-    @FindBy(xpath = "(//input[@class='form-control'])[2]")
+    //    @FindBy(xpath = "(//input[@class='form-control'])[2]")
+    @FindBy(xpath = "//input[contains(@type,'password')]")
     private WebElement password;
 
     @FindBy(xpath = "//button[@class='btn btn-outline-primary']")

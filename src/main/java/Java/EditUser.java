@@ -11,7 +11,8 @@ public class EditUser {
     private WebDriver driver;
 
     //    @FindBy(xpath = "(//button[contains(@class,'btn')])[1]")
-    @FindBy(xpath = "(//button[contains(.,'Edit')])[1]")
+//    @FindBy(xpath = "(//button[contains(.,'Edit')])[1]")
+    @FindBy(className = "btn")
     private WebElement editUserButton;
 
     @FindBy(id = "mat-input-0")

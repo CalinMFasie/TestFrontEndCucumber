@@ -4,17 +4,17 @@ Feature: FrontEnd Test
 
     Given User is logged in
 
-    Then Add new user with Username as "<username>"
+    Then Add new user with Username as "<userFirstName>"
 
     And Edit user
 
-    And Details user
+    And Show user details
 
     Then Delete user
 
     Then User is logged out
 
     Examples:
-      | username|
-      | Calin12 |
+      |userFirstName|
+      |Calin12|
 

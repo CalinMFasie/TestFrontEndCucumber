@@ -1,12 +1,13 @@
 package Java;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-@Getter
+@Getter@Setter
 public class AddUser {
 
     private WebDriver driver;
@@ -53,5 +54,8 @@ public class AddUser {
     public AddUser(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+    }
+    public void setUsername(String user){
+        username.sendKeys(user);
     }
 }
